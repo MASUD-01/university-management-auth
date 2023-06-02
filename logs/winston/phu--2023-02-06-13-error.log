@@ -1,0 +1,4 @@
+Fri Jun 02 2023 13:33:44} [right meow!] error: failed to connect--- Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+Fri Jun 02 2023 13:47:29} [right meow!] error: failed to connect--- Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+Fri Jun 02 2023 13:49:24} [right meow!] error: failed to connect--- Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
+Fri Jun 02 2023 13:52:34} [right meow!] error: failed to connect--- Invalid scheme, expected connection string to start with "mongodb://" or "mongodb+srv://"
