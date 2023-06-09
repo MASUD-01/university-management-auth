@@ -1,23 +1,32 @@
-/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { ErrorRequestHandler } from 'express';
-import { IGenericErrorMessage } from '../../interfaces/error';
+/* eslint-disable no-unused-expressions */
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
+import { Error } from 'mongoose';
 import config from '../../config';
-import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiError';
-import { errorlogger } from '../../shared/logger';
+import handleValidationError from '../../errors/handleValidationError';
 import { ZodError } from 'zod';
+import handleCastError from '../../errors/handleCastError';
+import { errorlogger } from '../../shared/logger';
+import { IGenericErrorMessage } from '../../interfaces/error';
 import handleZodErorr from '../../errors/handleZodErorr';
 
-const globalErorrHandler: ErrorRequestHandler = (error, req, res, next) => {
+const globalErrorHandler: ErrorRequestHandler = (
+  error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   config.env === 'development'
-    ? console.log('globalerrorhandler~~', error)
-    : errorlogger.error('globalerrorhandler~~', error);
+    ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
+    : errorlogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
+
   let statusCode = 500;
-  let message = 'something went wrong';
+  let message = 'Something went wrong !';
   let errorMessages: IGenericErrorMessage[] = [];
 
-  if (error?.name === 'validationError') {
+  if (error?.name === 'ValidationError') {
     const simplifiedError = handleValidationError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
@@ -27,8 +36,13 @@ const globalErorrHandler: ErrorRequestHandler = (error, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessage;
+  } else if (error?.name === 'CastError') {
+    const simplifiedError = handleCastError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
   } else if (error instanceof ApiError) {
-    statusCode = error.statusCode;
+    statusCode = error?.statusCode;
     message = error.message;
     errorMessages = error?.message
       ? [
@@ -40,7 +54,7 @@ const globalErorrHandler: ErrorRequestHandler = (error, req, res, next) => {
       : [];
   } else if (error instanceof Error) {
     message = error?.message;
-    errorMessages = error.message
+    errorMessages = error?.message
       ? [
           {
             path: '',
@@ -49,13 +63,20 @@ const globalErorrHandler: ErrorRequestHandler = (error, req, res, next) => {
         ]
       : [];
   }
+
   res.status(statusCode).json({
     success: false,
     message,
     errorMessages,
     stack: config.env !== 'production' ? error?.stack : undefined,
   });
-  next();
 };
 
-export default globalErorrHandler;
+export default globalErrorHandler;
+
+//path:
+//message:
+
+// 2025 Fall
+
+// 2025 and

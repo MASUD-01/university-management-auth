@@ -9,7 +9,7 @@ const moduleRoutes = [
     route: UserRoutes,
   },
   {
-    path: '/academic-semesters/',
+    path: '/academic-semesters',
     route: AcademicRoutes,
   },
 ];

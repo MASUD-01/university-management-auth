@@ -1,0 +1,2 @@
+Fri Jun 09 2023 23:9:21} [right meow!] error: Cast to ObjectId failed for value "647f4a55d97e73f0be773d5bdd" (type string) at path "_id" for model "AcademicSemester"
+Fri Jun 09 2023 23:15:5} [right meow!] error: Cast to ObjectId failed for value "647f4a55d97e73f0be773d5bdd" (type string) at path "_id" for model "AcademicSemester"

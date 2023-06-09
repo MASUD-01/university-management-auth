@@ -1,4 +1,5 @@
-import express, { Application, Response, Request } from 'express';
+import httpStatus from 'http-status';
+import express, { Application, Response, Request, NextFunction } from 'express';
 import cors from 'cors';
 import globalErorrHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
@@ -7,25 +8,26 @@ app.use(cors());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-//Application routes
-// app.use('/api/v1/users/', UserRoutes);
-// app.use('/api/v1/academic-semesters/', AcademicRoutes);
-
+//routes------routes----------------------------
 app.use('/api/v1/', routes);
-// //testing
-// app.get('/', async (req, res, next) => {
-//   // throw new ApiError(300,'ore baba error')
-//   Promise.reject(new Error('Unhandled promise Rejection'))
-// })
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
 });
-// app.post('/', (req: Request, res: Response) => {
-//   console.log(req.body)
-//   res.send('Hello World!')
-// })
-
 //global error handler
 app.use(globalErorrHandler);
+
+//handle not found
+app.use((req: Request, res: Response, next: NextFunction) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    success: false,
+    message: 'Not found',
+    errorMessages: [
+      {
+        path: req.originalUrl,
+        message: 'Api is not Found',
+      },
+    ],
+  });
+  next();
+});
 export default app;
