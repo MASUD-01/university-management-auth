@@ -6,69 +6,14 @@
     "auditLog": "C:\\university-management-auth-service\\logs\\winston\\errors\\.5e2ab9ea42fcdc3ea9e04e181dbfa6a9411b43ea-audit.json",
     "files": [
         {
-            "date": 1685890008787,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-04-06-20-error.log",
-            "hash": "22ef91474b715ac36ac34e4b7da6f1552671665c727e1f6b3b762abfec06d6dd"
+            "date": 1686404600517,
+            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-10-06-19-error.log",
+            "hash": "dea9df7b17708fdbf914c5046d56457d13df441b752f7b8ff807746087aa2333"
         },
         {
-            "date": 1685890842169,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-04-06-21-error.log",
-            "hash": "e3b2b02df74136e404dd9c78b5d946d660c13847caba17bebe01c05f0b9b6383"
-        },
-        {
-            "date": 1685894491680,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-04-06-22-error.log",
-            "hash": "13db3c57397bbdcef1f1a7fc99518ee7728af44d0eb6073cd244a10f739b30ba"
-        },
-        {
-            "date": 1685979845040,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-05-06-21-error.log",
-            "hash": "e952508347d5393c4d44754e2c456527f133ea85ff8cc6f97255f8efa97d7766"
-        },
-        {
-            "date": 1685980816157,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-05-06-22-error.log",
-            "hash": "26c7acb1162ba46a8ab246049d483d30d7c2d3ae86b19ffe373885cb11c8dae8"
-        },
-        {
-            "date": 1686063674834,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-06-06-21-error.log",
-            "hash": "de6d9c0b94027080a04f98cd2dd26d72bb369148793886d894a09d0da8ccb2a4"
-        },
-        {
-            "date": 1686148874387,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-07-06-20-error.log",
-            "hash": "d5b5bce96c263908b34a7ef460d9bbedf4aedf931a7acc7cea70f19b62c2cb76"
-        },
-        {
-            "date": 1686309865452,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-17-error.log",
-            "hash": "29fe29a0c433980b4f50429ae92c216f1472f6cbb8a34e59fc35cc22631719d3"
-        },
-        {
-            "date": 1686312092485,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-18-error.log",
-            "hash": "40d98d1761d4119308a1b30cd11a30a6a874bb9c388120049d970d05a55b6635"
-        },
-        {
-            "date": 1686315722812,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-19-error.log",
-            "hash": "8431543ac286f8b1707338b1328b2ae94c17ab3a384c6da3b3775007aafb73c8"
-        },
-        {
-            "date": 1686323951688,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-21-error.log",
-            "hash": "6d67bbcce9939c1973aa926658321571c94b32fe55ad32ea9b516804bbe63672"
-        },
-        {
-            "date": 1686326592699,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-22-error.log",
-            "hash": "86a5eb650d0cd12da7e817b7f82d2b0a36af1c832b4fbef86fa9ecb6987244ee"
-        },
-        {
-            "date": 1686330055872,
-            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-09-06-23-error.log",
-            "hash": "646a5102323a7ca74f16cbc16f16f32463599ff3df0b634b555fc3c1a868aec0"
+            "date": 1686405654952,
+            "name": "C:\\university-management-auth-service\\logs\\winston\\errors\\phu--2023-10-06-20-error.log",
+            "hash": "56ab269fb9fa75cdbc8bf250bbd5a8ecb98164b3c82a56d621550b08dbf86f0e"
         }
     ],
     "hashType": "sha256"

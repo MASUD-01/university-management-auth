@@ -1,6 +1,8 @@
-import doteenv from 'dotenv';
+/* eslint-disable no-undef */
+import dotenv from 'dotenv';
 import path from 'path';
-doteenv.config({ path: path.join(process.cwd(), '.env') });
+
+dotenv.config({ path: path.join(process.cwd(), '.env') });
 
 export default {
   env: process.env.NODE_ENV,

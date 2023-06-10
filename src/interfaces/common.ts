@@ -8,8 +8,9 @@ export type IGenericResponse<T> = {
   };
   data: T;
 };
-export type IGenericErroResponse = {
+
+export type IGenericErrorResponse = {
   statusCode: number;
   message: string;
-  errorMessage: IGenericErrorMessage[];
+  errorMessages: IGenericErrorMessage[];
 };
