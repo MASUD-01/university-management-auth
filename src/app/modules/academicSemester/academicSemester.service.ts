@@ -1,6 +1,6 @@
-import { paginationHelper } from './../../../helpers/paginationHelper';
 /* eslint-disable no-console */
 import ApiError from '../../../errors/ApiError';
+import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IpaginationOptions } from '../../../interfaces/pagination';
 import {
@@ -75,7 +75,7 @@ const getAllSemesters = async (
   //   },
   // ];
   const { page, limit, skip, sortBy, sortOrder } =
-    paginationHelper.calculatePagination(paginationOptions);
+    paginationHelpers.calculatePagination(paginationOptions);
 
   const sortCondions: { [key: string]: SortOrder } = {};
   if (sortBy && sortOrder) {
