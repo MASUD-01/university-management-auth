@@ -13,7 +13,7 @@ let server: Server;
 
 async function bootstrap() {
   try {
-    // await mongoose.connect('mongodb://127.0.0.1:27017');
+    // await mongoose.connect('mongodb://127.0.0.1:27017/test');
 
     await mongoose.connect(config.database_url as string);
     logger.info(`🛢   Database is connected successfully`);

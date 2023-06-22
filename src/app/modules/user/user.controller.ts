@@ -8,7 +8,13 @@ import catchAsync from '../../../shared/cacheAsync';
 
 const createStudent: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
-    const { student, ...userData } = req.body;
+    //req.body asbe
+    // {
+    //   password:'',
+    //   student: {
+    //   }
+    // }
+    const { student, ...userData /* eta mane password */ } = req.body;
     const result = await UserService.createStudent(student, userData);
 
     sendResponse<IUser>(res, {
