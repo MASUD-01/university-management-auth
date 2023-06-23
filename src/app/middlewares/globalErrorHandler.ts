@@ -2,20 +2,21 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-expressions */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
-import { Error } from 'mongoose';
 import config from '../../config';
 import ApiError from '../../errors/ApiError';
 import handleValidationError from '../../errors/handleValidationError';
+
 import { ZodError } from 'zod';
 import handleCastError from '../../errors/handleCastError';
-import { errorlogger } from '../../shared/logger';
 import { IGenericErrorMessage } from '../../interfaces/error';
-import handleZodErorr from '../../errors/handleZodErorr';
+import { errorlogger } from '../../shared/logger';
+import handleZodError from '../../errors/handleZodErorr';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
-  res: Response
+  res: Response,
+  next: NextFunction
 ) => {
   config.env === 'development'
     ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
@@ -31,7 +32,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ZodError) {
-    const simplifiedError = handleZodErorr(error);
+    const simplifiedError = handleZodError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
@@ -62,13 +63,13 @@ const globalErrorHandler: ErrorRequestHandler = (
         ]
       : [];
   }
-  console.log(error, '__________--------');
-  // res.status(statusCode).json({
-  //   success: false,
-  //   message,
-  //   errorMessages,
-  //   stack: config.env !== 'production' ? error?.stack : undefined,
-  // });
+
+  res.status(statusCode).json({
+    success: false,
+    message,
+    errorMessages,
+    stack: config.env !== 'production' ? error?.stack : undefined,
+  });
 };
 
 export default globalErrorHandler;
