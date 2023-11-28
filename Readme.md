@@ -1,4 +1,4 @@
-# ------------------------------Backend Development----------------------------------
+# ---------Backend Development-----------
 
 # University Management System Authentication Service
 
