@@ -70,3 +70,24 @@ Authentication
 POST /auth/login
 POST /auth/change-password
 POST /auth/refresh-token
+
+# credential for env
+
+NODE_ENV=development
+PORT=3001
+DATABASE_URL=mongodb+srv://university-admin:pS5NWqtT828jaTwP@cluster0.erh0dwx.mongodb.net/university-management?retryWrites=true&w=majority
+DEFAULT_STUDENT_PASS=university123
+DEFAULT_FACULTY_PASS=university123
+DEFAULT_ADMIN_PASS=university123
+
+BCRYPT_SALT_ROUNDS=12
+#JWT_SECRET='VERY-SECRECT'
+JWT_EXPIRES_IN=1d
+JWT_REFRESH_SECRET='very-refresh-secret'
+JWT_REFRESH_EXPIRES_IN=365d
+
+# Redis---14/09/2023
+
+JWT_SECRET='programming-hero'
+REDIS_URL='redis://localhost:6379'
+REDIS_TOKEN_EXPIRES_IN='846000'
