@@ -9,6 +9,7 @@ import {
 } from './academicSemester.constant';
 import {
   IAcademicSemester,
+  IAcademicSemesterCreateEvent,
   IAcademicSemestersFilters,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemesterModel';
@@ -127,10 +128,40 @@ const deleteSemester = async (
   const result = await AcademicSemester.findByIdAndDelete(id);
   return result;
 };
+const createSemesterFromEvent = async (
+  e: IAcademicSemesterCreateEvent
+): Promise<void> => {
+  await AcademicSemester.create({
+    title: e.title,
+    year: e.year,
+    code: e.code,
+    startMonth: e.startMonth,
+    endMonth: e.endMonth,
+    syncId: e.id,
+  });
+};
+const updatedOneIntoDBFromEvent = async (
+  e: IAcademicSemesterCreateEvent
+): Promise<void> => {
+  await AcademicSemester.findOneAndUpdate(
+    { syncId: e.id },
+    {
+      $set: {
+        title: e.title,
+        year: e.year,
+        code: e.code,
+        startMonth: e.startMonth,
+        endMonth: e.endMonth,
+      },
+    }
+  );
+};
 export const AcademicSemesterService = {
+  updatedOneIntoDBFromEvent,
   createSemester,
   getAllSemesters,
   getSingleSemester,
   updateSemester,
   deleteSemester,
+  createSemesterFromEvent,
 };

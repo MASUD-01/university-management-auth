@@ -9,19 +9,32 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
   const result = await AuthService.loginUser(loginData);
 
+  // const { refreshToken, ...others } = result;
+
+  //48.2
+  const { refreshToken } = result;
   //set refresh token into cookie
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,
   };
-  const { refreshToken, ...others } = result;
 
   res.cookie('refreshToken', refreshToken, cookieOptions);
   sendResponse<ILoginUserResponse>(res, {
     statusCode: 200,
     success: true,
     message: 'User loginned successfully',
-    data: others,
+    data: result,
+  });
+});
+const changePassword = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const { ...passwordData } = req.body;
+  await AuthService.changePassword(user, passwordData);
+  sendResponse<ILoginUserResponse>(res, {
+    statusCode: 200,
+    success: true,
+    message: 'User loginned successfully',
   });
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
@@ -45,4 +58,5 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 export const AuthController = {
   loginUser,
   refreshToken,
+  changePassword,
 };

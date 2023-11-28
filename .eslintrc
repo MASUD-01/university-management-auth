@@ -11,8 +11,9 @@
       "process": "readonly"
     },
     "rules": {
-      "no-unused-vars": "error",
       // "no-console":"error",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
       "no-undef":"error",
       "no-unused-expressions":"error",
       "no-unreachable":"error",

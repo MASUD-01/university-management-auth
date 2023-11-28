@@ -19,11 +19,14 @@ const userSchema = new Schema<IUser, UserModel>(
     password: {
       type: String,
       required: true,
-      select: 0, //pass ar front end e pathabe na
+      select: 0, //pass ar front end e pathabe na select 0
     },
     needsPasswordChange: {
       type: Boolean,
       default: true,
+    },
+    passwordChangedAt: {
+      type: Date,
     },
     student: {
       type: Schema.Types.ObjectId,
@@ -78,6 +81,9 @@ userSchema.pre('save', async function (next) {
     user.password,
     Number(config.bcrypt_salt_rounds)
   );
+  if (!user.needsPasswordChange) {
+    this.passwordChangedAt = new Date();
+  }
   next();
 });
 export const User = model<IUser, UserModel>('User', userSchema);

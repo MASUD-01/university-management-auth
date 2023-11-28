@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import bcrypt from 'bcrypt';
 import { JwtPayload } from 'jsonwebtoken';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import {
+  IChangePassword,
   ILoginUserResponse,
   IRefreshTokenResponse,
   IloginiUser,
@@ -54,6 +56,51 @@ const loginUser = async (payload: IloginiUser): Promise<ILoginUserResponse> => {
   };
 };
 
+const changePassword = async (
+  user: JwtPayload | null,
+  payload: IChangePassword
+): Promise<void> => {
+  const { oldPassword, newPassword } = payload;
+  //checking user exist
+  // const isUserExist = await User.isUserExist(user?.userid);
+  //alternative way
+  const isUserExist = await User.findOne({ id: user?.userid }).select(
+    '+password'
+  );
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
+  }
+
+  //cheking oldpasword
+  if (
+    isUserExist?.password &&
+    !(await User.isPasswordMatched(oldPassword, isUserExist?.password))
+  ) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'old password is incorrect');
+  }
+  //hash pass before saving
+  const newHashedPassword = await bcrypt.hash(
+    newPassword,
+    Number(config.bcrypt_salt_rounds as string)
+  );
+
+  //update password
+  const query = { id: user?.userId };
+  const updatedData = {
+    password: newHashedPassword,
+    needsPasswordChange: false,
+    passwordChangedAt: new Date(),
+  };
+  await User.findOneAndUpdate(query, updatedData);
+
+  //------------------------------
+  //updating pass using save()
+  isUserExist.password = newPassword;
+  // isUserExist.needsPasswordChange=false
+
+  isUserExist.save();
+};
+
 const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   //verifytoken
   let verifyToken: JwtPayload | null | string = null;
@@ -89,6 +136,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 export const AuthService = {
   loginUser,
   refreshToken,
+  changePassword,
 };
 
 /* User.amarMethod --> StaticRange

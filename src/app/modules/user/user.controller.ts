@@ -14,8 +14,8 @@ const createStudent: RequestHandler = catchAsync(
     //   student: {
     //   }
     // }
-    const { student, ...userData /* eta mane password */ } = req.body;
-    const result = await UserService.createStudent(student, userData);
+    const { student, ...userDataPass /* eta mane password */ } = req.body;
+    const result = await UserService.createStudent(student, userDataPass);
 
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,

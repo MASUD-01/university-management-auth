@@ -17,6 +17,8 @@ import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { IAdmin } from '../admin/admin.interface';
 import { Admin } from '../admin/admin.model';
+import { RedisClient } from '../../../shared/redis';
+import { EVENT_STUDENT_CREATED } from './user.constant';
 
 const createStudent = async (
   student: IStudent,
@@ -168,16 +170,13 @@ const createAdmin = async (
   if (!user.password) {
     user.password = config.default_admin_pass as string;
   }
-
   // set role
   user.role = 'admin';
-
   // generate faculty id
   let newUserAllData = null;
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-
     const id = await generateAdminId();
     user.id = id;
     admin.id = id;
@@ -215,7 +214,12 @@ const createAdmin = async (
       ],
     });
   }
-
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_STUDENT_CREATED,
+      JSON.stringify(newUserAllData.student)
+    );
+  }
   return newUserAllData;
 };
 export const UserService = {
